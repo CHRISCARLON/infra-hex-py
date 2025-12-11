@@ -1,0 +1,15 @@
+[package]
+name = "infra-hex-py"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "infra_hex_py"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.27.2", features = ["extension-module"] }
+pyo3-arrow = "0.13"
+infra-hex-rs = { path = "../infra-hex-rs" }
+tokio = { version = "1.48", features = ["rt-multi-thread"] }

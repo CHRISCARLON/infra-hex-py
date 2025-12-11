@@ -1,0 +1,27 @@
+[build-system]
+requires = ["maturin>=1.10,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "infra-hex-py"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+dependencies = [
+    "geopandas==1.1.1",
+    "pyarrow==22.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "maturin==1.10.2",
+    "pytest==9.0.2",
+]
+
+[tool.pytest.ini_options]
+addopts = "-vv -s"
+testpaths = ["tests"]
