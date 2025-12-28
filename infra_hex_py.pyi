@@ -7,3 +7,7 @@ def get_hex_summary(
     max_lon: float,
     zoom: int,
 ) -> pa.RecordBatch: ...
+def get_hex_summary_polygon_area(
+    object_id: int,
+    zoom: int,
+) -> pa.RecordBatch: ...

@@ -1,0 +1,603 @@
+:root {
+    --bg-primary: #fefefe;
+    --bg-secondary: #f5f7f9;
+    --bg-tertiary: #eef1f4;
+    --bg-hover: #e8ecf0;
+    --border-color: #dde3e9;
+    --text-primary: #4a5568;
+    --text-secondary: #64748b;
+    --text-muted: #a0aec0;
+    --accent-primary: #7c9eb2;
+    --accent-hover: #9ab5c5;
+    --accent-dark: #5a8299;
+    --success-color: #81c995;
+    --warning-color: #f0c78a;
+    --error-color: #e8a0a0;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Main container */
+.main .block-container {
+    padding: 2rem;
+    max-width: 1200px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Global typography */
+body,
+html,
+div,
+p,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+button,
+select,
+textarea,
+li,
+ul,
+ol,
+td,
+th,
+code,
+pre {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    font-smooth: auto !important;
+    color: var(--text-primary);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 0.8rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary) !important;
+}
+
+p,
+ol,
+ul,
+dl {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary) !important;
+}
+
+a {
+    color: var(--accent-primary) !important;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    border-bottom: 1px solid var(--accent-primary);
+    background-color: transparent;
+    color: var(--accent-hover) !important;
+}
+
+/* Code formatting */
+code,
+pre {
+    font-family: "Consolas", "Monaco", monospace !important;
+    font-size: 0.9rem;
+    background-color: var(--bg-tertiary) !important;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary) !important;
+}
+
+/* Enforce consistent styling in markdown */
+.stMarkdown * {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Sidebar styling */
+.sidebar .sidebar-content {
+    background-color: var(--bg-secondary) !important;
+    padding: 1.5rem;
+    border-right: 1px solid var(--border-color);
+    color: var(--text-primary) !important;
+}
+
+[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Form Elements */
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input,
+.stDateInput > div > div > input,
+.stTextArea > div > div > textarea {
+    border-radius: 4px;
+    border: 1px solid var(--border-color) !important;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stTextInput > div > div > input:focus,
+.stNumberInput > div > div > input:focus,
+.stDateInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: var(--accent-primary) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 155, 255, 0.3);
+}
+
+/* Labels */
+label,
+.stMarkdown label {
+    color: var(--text-secondary) !important;
+}
+
+/* Buttons */
+.stButton > button {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-weight: 400;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.stButton > button:hover {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-hover) !important;
+    box-shadow: none;
+    transform: none;
+}
+
+.stButton > button *,
+.stButton > button div,
+.stButton > button span,
+.stButton > button p {
+    color: var(--text-primary) !important;
+}
+
+/* Select box styling */
+.stSelectbox > div > div {
+    border-radius: 4px;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--bg-tertiary) !important;
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stSelectbox > div > div:hover {
+    border-color: var(--accent-dark) !important;
+}
+
+.stSelectbox > div > div:focus-within {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 0 3px rgba(59, 155, 255, 0.3);
+}
+
+/* Dropdown text color */
+.stSelectbox div[data-baseweb="select"] > div {
+    color: var(--text-primary) !important;
+}
+
+/* Dropdown options styling */
+div[data-baseweb="popover"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+div[data-baseweb="popover"] div[data-baseweb="menu"] {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-lg);
+    border-radius: 4px;
+}
+
+div[data-baseweb="select"] li {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
+div[data-baseweb="select"] li:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+/* Multi-select */
+.stMultiSelect > div > div {
+    border-radius: 4px;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--bg-tertiary) !important;
+    box-shadow: var(--shadow-sm);
+}
+
+.stMultiSelect div[data-baseweb="select"] > div {
+    color: var(--text-primary) !important;
+}
+
+/* Multi-select tags */
+.stMultiSelect span[data-baseweb="tag"] {
+    background-color: var(--accent-dark) !important;
+    color: white !important;
+}
+
+/* Checkbox */
+.stCheckbox {
+    color: var(--text-secondary) !important;
+}
+
+.stCheckbox > label {
+    color: var(--text-secondary) !important;
+}
+
+.stCheckbox > label > div[data-testid="stMarkdownContainer"] p {
+    color: var(--text-secondary) !important;
+}
+
+.stCheckbox > div > label > div {
+    border-radius: 3px;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* DataFrames/Tables */
+.stDataFrame,
+.dataframe {
+    border-collapse: separate;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background-color: var(--bg-secondary) !important;
+}
+
+.stDataFrame th,
+.dataframe th {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.stDataFrame td,
+.dataframe td {
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
+.stDataFrame tr:nth-child(even),
+.dataframe tr:nth-child(even) {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.stDataFrame tr:hover,
+.dataframe tr:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+/* Maps */
+.folium-map {
+    width: 100% !important;
+    min-height: 600px !important;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+}
+
+/* Map container responsiveness */
+.stFolium {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.stFolium > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.stFolium iframe {
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: 600px;
+    left: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Metrics */
+.stMetric {
+    background-color: var(--bg-secondary) !important;
+    padding: 1.2rem;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stMetric:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stMetric .metric-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-primary) !important;
+}
+
+.stMetric .metric-label {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+}
+
+/* Expander styling */
+.streamlit-expander {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--bg-secondary) !important;
+}
+
+.streamlit-expander .streamlit-expanderHeader {
+    font-weight: 500;
+    padding: 0.8rem 1rem;
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.streamlit-expander .streamlit-expanderContent {
+    padding: 1rem;
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Alert boxes */
+.element-container .stAlert {
+    background-color: transparent;
+    border: none;
+}
+
+.element-container .stAlert > div {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    box-shadow: var(--shadow-md) !important;
+    padding: 1rem !important;
+}
+
+.element-container .stAlert.info > div,
+.element-container .stAlert[data-baseweb="notification"][kind="info"] {
+    background-color: rgba(59, 155, 255, 0.15) !important;
+    border-left: 4px solid var(--accent-primary) !important;
+}
+
+.element-container .stAlert.info > div > *,
+.element-container .stAlert[data-baseweb="notification"][kind="info"] * {
+    color: var(--text-primary) !important;
+}
+
+.element-container .stAlert.warning > div,
+.element-container .stAlert[data-baseweb="notification"][kind="warning"] {
+    background-color: rgba(210, 153, 34, 0.15) !important;
+    border-left: 4px solid var(--warning-color) !important;
+}
+
+.element-container .stAlert.warning > div > *,
+.element-container .stAlert[data-baseweb="notification"][kind="warning"] * {
+    color: var(--text-primary) !important;
+}
+
+.element-container .stAlert.error > div,
+.element-container .stAlert[data-baseweb="notification"][kind="error"] {
+    background-color: rgba(248, 81, 73, 0.15) !important;
+    border-left: 4px solid var(--error-color) !important;
+}
+
+.element-container .stAlert.error > div > *,
+.element-container .stAlert[data-baseweb="notification"][kind="error"] * {
+    color: var(--text-primary) !important;
+}
+
+.element-container .stAlert.success > div,
+.element-container .stAlert[data-baseweb="notification"][kind="success"] {
+    background-color: rgba(63, 185, 80, 0.15) !important;
+    border-left: 4px solid var(--success-color) !important;
+}
+
+.element-container .stAlert.success > div > *,
+.element-container .stAlert[data-baseweb="notification"][kind="success"] * {
+    color: var(--text-primary) !important;
+}
+
+/* Map tooltips */
+.leaflet-tooltip {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    box-shadow: var(--shadow-lg);
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: normal;
+    font-family: "Segoe UI", Arial, sans-serif !important;
+    color: var(--text-primary) !important;
+}
+
+/* Progress bar */
+.stProgress > div > div > div {
+    background-color: var(--accent-primary) !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+.stProgress > div > div {
+    background-color: var(--bg-tertiary) !important;
+    border: none !important;
+    border-radius: 3px !important;
+    height: 6px !important;
+}
+
+/* Spinner */
+.stSpinner > div {
+    border-color: var(--accent-primary) !important;
+}
+
+/* Ensure containers take full width */
+.element-container,
+.block-container {
+    max-width: 100% !important;
+}
+
+.row-widget.stHorizontal {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Success/Warning/Error messages */
+.stSuccess,
+.stWarning,
+.stError,
+.stInfo {
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background-color: var(--bg-secondary);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary) !important;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+}
+
+/* Radio buttons */
+.stRadio > label {
+    color: var(--text-secondary) !important;
+}
+
+.stRadio div[role="radiogroup"] > label {
+    color: var(--text-secondary) !important;
+}
+
+/* Slider */
+.stSlider > div > div > div {
+    color: var(--text-primary) !important;
+}
+
+/* File uploader */
+.stFileUploader section {
+    background-color: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+}
+
+.stFileUploader section button {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+}
+
+/* Download button */
+.stDownloadButton > button {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.stDownloadButton > button:hover {
+    background-color: var(--accent-hover) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}

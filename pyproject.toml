@@ -12,8 +12,17 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-    "geopandas==1.1.1",
-    "pyarrow==22.0.0",
+    "geopandas>=1.0.0",
+    "pyarrow>=17.0.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+viz = [
+    "folium>=0.20.0",
+    "branca>=0.6.0",
+    "streamlit>=1.52.1",
+    "streamlit-folium>=0.25.3",
 ]
 
 [dependency-groups]
@@ -22,6 +31,14 @@ dev = [
     "pytest==9.0.2",
 ]
 
+[tool.maturin]
+python-source = "python"
+module-name = "infra_hex_py.infra_hex_py"
+
 [tool.pytest.ini_options]
 addopts = "-vv -s"
 testpaths = ["tests"]
+
+[tool.pyright]
+extraPaths = ["python"]
+pythonVersion = "3.12"
