@@ -10,9 +10,12 @@ try:
 
     HAS_VIZ_DEPS = True
 except ImportError:
+    cm = None
+    folium = None
     HAS_VIZ_DEPS = False
 
 
+# TODO: Look into speeding this up - will be slow for larger grids
 def jenks_breaks(data, n_classes: int = 5) -> List[float]:
     """
     Calculate Jenks natural breaks for classification.
@@ -27,45 +30,63 @@ def jenks_breaks(data, n_classes: int = 5) -> List[float]:
     Returns:
         List of break points including min and max values
     """
-    data = np.array(sorted(data))
-    n = len(data)
+    sorted_values = np.array(sorted(data))
+    n_values = len(sorted_values)
 
-    if n <= n_classes:
-        return data.tolist()
+    if n_values <= n_classes:
+        return sorted_values.tolist()
 
-    lower_class_limits = np.zeros((n + 1, n_classes + 1))
-    variance_combinations = np.full((n + 1, n_classes + 1), np.inf)
-    variance_combinations[1, 1] = 0
+    # DP tables:
+    # - `class_start_index[i, j]` is the (1-based) start index of the j-th class when using first i values.
+    # - `min_within_class_variance[i, j]` is the minimum achievable within-class variance for that partition.
+    class_start_index = np.zeros((n_values + 1, n_classes + 1))
+    min_within_class_variance = np.full((n_values + 1, n_classes + 1), np.inf)
+    min_within_class_variance[1, 1] = 0
 
-    for i in range(2, n + 1):
-        s1, s2, w = 0.0, 0.0, 0
-        for m in range(1, i + 1):
-            i3 = i - m + 1
-            val = data[i3 - 1]
-            s2 += val * val
-            s1 += val
-            w += 1
-            variance = s2 - (s1 * s1) / w
-            if i3 > 1:
-                for j in range(2, n_classes + 1):
-                    if (
-                        variance_combinations[i, j]
-                        >= variance + variance_combinations[i3 - 1, j - 1]
-                    ):
-                        lower_class_limits[i, j] = i3
-                        variance_combinations[i, j] = (
-                            variance + variance_combinations[i3 - 1, j - 1]
-                        )
-            lower_class_limits[i, 1] = 1
-            variance_combinations[i, 1] = variance
+    for end_idx in range(2, n_values + 1):
+        # Running totals for the segment [segment_start..end_idx] as we extend it backwards.
+        running_sum = 0.0
+        running_sum_squares = 0.0
+        segment_count = 0
 
-    breaks = [data[-1]]
-    k = n
-    for j in range(n_classes, 1, -1):
-        idx = int(lower_class_limits[k, j]) - 1
-        breaks.append(data[idx])
-        k = int(lower_class_limits[k, j]) - 1
-    breaks.append(data[0])
+        for segment_len in range(1, end_idx + 1):
+            segment_start = (
+                end_idx - segment_len + 1
+            )  # 1-based start index for the segment
+            value = sorted_values[
+                segment_start - 1
+            ]  # convert to 0-based for array access
+
+            running_sum_squares += value * value
+            running_sum += value
+            segment_count += 1
+
+            segment_variance = (
+                running_sum_squares - (running_sum * running_sum) / segment_count
+            )
+
+            if segment_start > 1:
+                for class_idx in range(2, n_classes + 1):
+                    candidate = (
+                        segment_variance
+                        + min_within_class_variance[segment_start - 1, class_idx - 1]
+                    )
+                    if min_within_class_variance[end_idx, class_idx] >= candidate:
+                        class_start_index[end_idx, class_idx] = segment_start
+                        min_within_class_variance[end_idx, class_idx] = candidate
+
+            class_start_index[end_idx, 1] = 1
+            min_within_class_variance[end_idx, 1] = segment_variance
+
+    breaks = [sorted_values[-1]]
+    backtrack_end = n_values
+    for class_idx in range(n_classes, 1, -1):
+        start_idx = int(class_start_index[backtrack_end, class_idx])  # 1-based
+        break_idx = start_idx - 1  # convert to 0-based
+        breaks.append(sorted_values[break_idx])
+        backtrack_end = start_idx - 1
+
+    breaks.append(sorted_values[0])
 
     return sorted(set(breaks))
 
@@ -80,7 +101,7 @@ PALETTES = {
 }
 
 
-def create_choropleth_map(
+def create_hex_grid_map(
     gdf,
     value_column: str = "pipe_count",
     palette: str = "grey_blue",
@@ -90,7 +111,7 @@ def create_choropleth_map(
     tooltip_fields: Optional[List[str]] = None,
 ):
     """
-    Create a Folium choropleth map from a GeoDataFrame.
+    Create a Folium hex grid map from a GeoDataFrame.
 
     Args:
         gdf: GeoDataFrame with geometry and value columns
@@ -110,6 +131,9 @@ def create_choropleth_map(
             "Install with: pip install infra-hex-py[viz]"
         )
 
+    assert folium is not None
+    assert cm is not None
+
     if gdf.crs and gdf.crs.to_epsg() != 4326:
         gdf = gdf.to_crs(epsg=4326)
 
@@ -123,6 +147,7 @@ def create_choropleth_map(
     if len(gdf) == 0:
         return m
 
+    # TODO: Make this a choice
     colors = PALETTES.get(palette, PALETTES["grey_blue"])
 
     min_val = gdf[value_column].min()

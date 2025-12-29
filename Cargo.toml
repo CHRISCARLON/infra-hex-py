@@ -11,6 +11,6 @@ crate-type = ["cdylib"]
 [dependencies]
 pyo3 = { version = "0.27.2", features = ["extension-module"] }
 pyo3-arrow = "0.13"
-infra-hex-rs = { path = "../infra-hex-rs" }
+infra-hex-rs = "0.1.0"
 tokio = { version = "1.48", features = ["rt-multi-thread"] }
 geo = "0.32"

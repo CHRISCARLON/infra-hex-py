@@ -5,8 +5,8 @@ __all__ = ["get_hex_summary", "get_hex_summary_polygon_area"]
 
 # Optional viz exports (require infra-hex-py[viz])
 try:
-    from .viz import PALETTES, create_choropleth_map, jenks_breaks  # noqa: F401
+    from .viz import PALETTES, create_hex_grid_map, jenks_breaks  # noqa: F401
 
-    __all__.extend(["jenks_breaks", "create_choropleth_map", "PALETTES"])
+    __all__.extend(["jenks_breaks", "create_hex_grid_map", "PALETTES"])
 except ImportError:
     pass
